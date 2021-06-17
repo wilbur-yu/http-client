@@ -15,7 +15,6 @@ use GuzzleHttp\Psr7\Response as Psr7Response;
 use Hyperf\Utils\Collection;
 use Hyperf\Utils\Str;
 use Hyperf\Utils\Traits\Macroable;
-use Illuminate\Contracts\Events\Dispatcher;
 use PHPUnit\Framework\Assert as PHPUnit;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
@@ -154,7 +153,7 @@ class Factory
     /**
      * Get an invokable object that returns a sequence of responses in order for use during stubbing.
      *
-     * @return \Illuminate\Http\Client\ResponseSequence
+     * @return ResponseSequence
      */
     public function sequence(array $responses = [])
     {
@@ -327,7 +326,7 @@ class Factory
      * Get a collection of the request / response pairs matching the given truth test.
      *
      * @param callable $callback
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function recorded($callback = null)
     {
@@ -347,7 +346,7 @@ class Factory
     /**
      * Get the current event dispatcher implementation.
      *
-     * @return null|\Illuminate\Contracts\Events\Dispatcher
+     * @return null|EventDispatcherInterface
      */
     public function getDispatcher()
     {

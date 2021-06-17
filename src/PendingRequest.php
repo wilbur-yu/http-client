@@ -31,7 +31,7 @@ class PendingRequest
     /**
      * The factory instance.
      *
-     * @var null|\Illuminate\Http\Client\Factory
+     * @var null|Factory
      */
     protected $factory;
 

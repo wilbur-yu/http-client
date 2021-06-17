@@ -32,7 +32,6 @@ class RequestException extends HttpClientException
     /**
      * Prepare the exception message.
      *
-     * @param \Illuminate\Http\Client\Response $response
      * @return string
      */
     protected function prepareMessage(Response $response)
