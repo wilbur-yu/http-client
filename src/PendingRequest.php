@@ -671,7 +671,7 @@ class PendingRequest
      */
     public function buildClient()
     {
-        return $this->client = $this->client ?: new Client([
+        return $this->client = $this->client ?: make(Client::class, [
             'handler' => $this->buildHandlerStack(),
             'cookies' => true,
         ]);
