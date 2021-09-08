@@ -18,14 +18,25 @@ use FriendsOfHyperf\Http\Client\Http;
  */
 class HttpClientTest extends TestCase
 {
-    public function testBase()
+    public function testOk()
     {
-        $response = Http::post('http://laravel.com/test-missing-page');
-
-        $this->assertFalse($response->ok());
-
-        $response = Http::post('http://www.baidu.com');
-
+        $response = Http::get('http://www.baidu.com');
         $this->assertTrue($response->ok());
+    }
+
+    public function testFailed()
+    {
+        $response = Http::get('http://laravel.com/test-missing-page');
+        $this->assertTrue($response->clientError());
+
+        $this->expectException(\FriendsOfHyperf\Http\Client\RequestException::class);
+        $response->throw();
+    }
+
+    public function testBuildClient()
+    {
+        $client = Http::buildClient();
+
+        $this->assertInstanceOf(\GuzzleHttp\Client::class, $client);
     }
 }

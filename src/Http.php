@@ -13,6 +13,7 @@ namespace FriendsOfHyperf\Http\Client;
 use Hyperf\Utils\Traits\Macroable;
 
 /**
+ * @method static \GuzzleHttp\Client buildClient()
  * @method static PendingRequest accept(string $contentType)
  * @method static PendingRequest acceptJson()
  * @method static PendingRequest asForm()
