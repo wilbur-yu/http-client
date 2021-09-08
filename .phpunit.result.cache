@@ -1,1 +1,0 @@
-{"version":1,"defects":{"FriendsOfHyperf\\Http\\Client\\Tests\\HttpClientTest::testStubbedResponsesAreReturnedAfterFaking":3},"times":{"FriendsOfHyperf\\Http\\Client\\Tests\\HttpClientTest::testStubbedResponsesAreReturnedAfterFaking":1.725,"FriendsOfHyperf\\Http\\Client\\Tests\\HttpClientTest::test404":1.029,"FriendsOfHyperf\\Http\\Client\\Tests\\HttpClientTest::testBase":1.355}}

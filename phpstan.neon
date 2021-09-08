@@ -6,9 +6,10 @@
 parameters:
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:
-    - '#Static call to instance method Hyperf\\HttpServer\\Router\\Router::[a-zA-Z0-9\\_]+\(\)#'
-    - '#Static call to instance method Hyperf\\DbConnection\\Db::[a-zA-Z0-9\\_]+\(\)#'
-    - '#Static call to instance method Hyperf\\DB\\DB::execute\(\)#'
-    - '#Unsafe usage of new static\(\)#'
-    - '#Undefined variable: \$this#'
+    # - '#Static call to instance method Hyperf\\HttpServer\\Router\\Router::[a-zA-Z0-9\\_]+\(\)#'
+    # - '#Static call to instance method Hyperf\\DbConnection\\Db::[a-zA-Z0-9\\_]+\(\)#'
+    # - '#Static call to instance method Hyperf\\DB\\DB::execute\(\)#'
+    # - '#Unsafe usage of new static\(\)#'
+    # - '#Undefined variable: \$this#'
     - '#Access to an undefined property FriendsOfHyperf\\Http\\Client\\Response::\$\w+\.#'
+    - '#Function GuzzleHttp\\Psr7\\get_message_body_summary not found.#'
