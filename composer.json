@@ -26,12 +26,18 @@
             "FriendsOfHyperf\\Http\\Client\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "FriendsOfHyperf\\Http\\Client\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "hyperf": {
             "config": "FriendsOfHyperf\\Http\\Client\\ConfigProvider"
         }
     },
     "scripts": {
+        "test": "phpunit -c phpunit.xml --colors=always",
         "cs-fix": "php-cs-fixer fix $1",
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./src"
     }
