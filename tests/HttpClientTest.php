@@ -18,6 +18,13 @@ use FriendsOfHyperf\Http\Client\Http;
  */
 class HttpClientTest extends TestCase
 {
+    public function testBuildClient()
+    {
+        $client = Http::buildClient();
+
+        $this->assertInstanceOf(\GuzzleHttp\Client::class, $client);
+    }
+
     public function testOk()
     {
         $response = Http::get('http://www.baidu.com');
@@ -33,10 +40,19 @@ class HttpClientTest extends TestCase
         $response->throw();
     }
 
-    public function testBuildClient()
+    public function testMethods()
     {
-        $client = Http::buildClient();
+        $response = Http::get('http://httpbin.org/get');
+        $this->assertTrue($response->ok());
+        $this->assertIsArray($response->json());
+        $this->assertArrayHasKey('args', $response->json());
 
-        $this->assertInstanceOf(\GuzzleHttp\Client::class, $client);
+        $response = Http::post('http://httpbin.org/post', ['foo' => 'bar']);
+        $this->assertTrue($response->ok());
+        $this->assertIsArray($response->json());
+        // var_dump($response->json());
+        $this->assertArrayHasKey('json', $response->json());
+        $this->assertArrayHasKey('foo', $response->json()['json']);
+        $this->assertEquals('bar', $response->json()['json']['foo']);
     }
 }
