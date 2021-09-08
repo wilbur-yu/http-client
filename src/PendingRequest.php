@@ -671,8 +671,21 @@ class PendingRequest
      */
     public function buildClient()
     {
-        return $this->client = $this->client ?: make(Client::class, [
-            'handler' => $this->buildHandlerStack(),
+        return $this->requestsReusableClient()
+               ? $this->getReusableClient()
+               : $this->createClient($this->buildHandlerStack());
+    }
+
+    /**
+     * Create new Guzzle client.
+     *
+     * @param \GuzzleHttp\HandlerStack $handlerStack
+     * @return \GuzzleHttp\Client
+     */
+    public function createClient($handlerStack)
+    {
+        return new Client([
+            'handler' => $handlerStack,
             'cookies' => true,
         ]);
     }
@@ -690,11 +703,21 @@ class PendingRequest
             $handler = new CoroutineHandler();
         }
 
-        return tap(HandlerStack::create($handler), function ($stack) {
+        return $this->pushHandlers(HandlerStack::create($handler));
+    }
+
+    /**
+     * Add the necessary handlers to the given handler stack.
+     *
+     * @param \GuzzleHttp\HandlerStack $handlerStack
+     * @return \GuzzleHttp\HandlerStack
+     */
+    public function pushHandlers($handlerStack)
+    {
+        return tap($handlerStack, function ($stack) {
             $stack->push($this->buildBeforeSendingHandler());
             $stack->push($this->buildRecorderHandler());
             $stack->push($this->buildStubHandler());
-
             $this->middleware->each(function ($middleware) use ($stack) {
                 $stack->push($middleware);
             });
@@ -842,6 +865,26 @@ class PendingRequest
         $this->client = $client;
 
         return $this;
+    }
+
+    /**
+     * Determine if a reusable client is required.
+     *
+     * @return bool
+     */
+    protected function requestsReusableClient()
+    {
+        return ! is_null($this->client) || $this->async;
+    }
+
+    /**
+     * Retrieve a reusable Guzzle client.
+     *
+     * @return \GuzzleHttp\Client
+     */
+    protected function getReusableClient()
+    {
+        return $this->client = $this->client ?: $this->createClient($this->buildHandlerStack());
     }
 
     /**
