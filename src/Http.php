@@ -42,6 +42,7 @@ use Hyperf\Utils\Traits\Macroable;
  * @method static PendingRequest withUserAgent(string $userAgent)
  * @method static PendingRequest withoutRedirecting()
  * @method static PendingRequest withoutVerifying()
+ * @method static PendingRequest setClient(\GuzzleHttp\Client $client)
  * @method static array pool(callable $callback)
  * @method static Response delete(string $url, array $data = [])
  * @method static Response get(string $url, null|array|string $query = null)
